@@ -42,8 +42,8 @@ if placement_method:
     if placement_method in ["ZOrder", "Hilbert"]:
         lines_df = get_points_connection_lines(points)
         line_chart = alt.Chart(lines_df).mark_line(color="gray", width=2).encode(
-            x="x",
-            y="y",
+            x=alt.X('x:O', axis=alt.Axis(title='X', titleFontWeight='bold', titleFontSize=14)),
+            y=alt.Y('y:O', axis=alt.Axis(title='Y', titleFontWeight='bold', titleFontSize=14)),
             order="linear_order"
         )
 
