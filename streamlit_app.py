@@ -11,7 +11,7 @@ st.set_page_config(page_title="Space Filling Techniques", layout="centered")
 
 st.title("Record-file assignment simulator")
 
-number_of_records = st.selectbox("Number of records", [2**4, 2**6, 2**8, 2**10], index=1)
+number_of_records = st.selectbox("Number of records", [2**4, 2**6, 2**8], index=1)
 number_of_files = st.text_input(label="File Count", value="4")
 placement_method = st.selectbox("Placement method", ["Random", "ZOrder", "Hilbert"])
 
@@ -31,8 +31,18 @@ if placement_method:
     records = pd.concat(data_frames)
 
     scatter_plot = alt.Chart(records, height=600, width=600).mark_circle(size=100).encode(
-        x="x:Q",
-        y="y:Q",
+        x=alt.X("x:N", 
+                axis=alt.Axis(
+                    title="X", titleFontWeight="bold", titleFontSize=16, labelFontSize=14,
+                    labelFontWeight="bold"
+                )
+        ),
+        y=alt.Y("y:N", 
+                axis=alt.Axis(
+                    title="Y", titleFontWeight="bold", titleFontSize=16, labelFontSize=14,
+                    labelFontWeight="bold"
+                )
+        ),
         color="file",
         tooltip=["x", "y", "file", "linear_order"]
     ).properties(
@@ -42,8 +52,8 @@ if placement_method:
     if placement_method in ["ZOrder", "Hilbert"]:
         lines_df = get_points_connection_lines(points)
         line_chart = alt.Chart(lines_df).mark_line(color="gray", width=2).encode(
-            x=alt.X('x:O', axis=alt.Axis(title='X', titleFontWeight='bold', titleFontSize=14)),
-            y=alt.Y('y:O', axis=alt.Axis(title='Y', titleFontWeight='bold', titleFontSize=14)),
+            x="x:N",
+            y="y:N",
             order="linear_order"
         )
 
