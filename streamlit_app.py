@@ -9,6 +9,7 @@ from helpers import get_linear_order, get_file_placement, get_points_connection_
 
 st.set_page_config(page_title="Space Filling Techniques", layout="centered")
 
+st.title("Record-file assignment simulator")
 
 number_of_records = st.selectbox("Number of records", [2**4, 2**6, 2**8, 2**10], index=1)
 number_of_files = st.text_input(label="File Count", value="4")
